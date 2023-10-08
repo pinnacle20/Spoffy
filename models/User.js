@@ -17,7 +17,20 @@ const User = new mongoose.Schema({
     username: {
         type: String,
         required: true
-    }
+    },
+    likedSongs: {
+        type: String,
+        default: ""
+    },
+    likedPlaylist: {
+        type: String,
+        default: ""
+    },
+    subscribedArtists: {
+        type: String,
+        default: ""
+    },
+    
 })
 
 const UserModel = mongoose.model("User", User);
