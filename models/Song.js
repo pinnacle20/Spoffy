@@ -2,19 +2,19 @@
 const mongoose = require("mongoose");
 
 const Song = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         required: true
     },
-    thumbnail:{
-        type: String,
-        required : true
-    },
-    track:{
+    thumbnail: {
         type: String,
         required: true
     },
-    artist:{
+    track: {
+        type: String,
+        required: true
+    },
+    artist: {
         type: mongoose.Types.ObjectId,
         ref: "user",
     }
