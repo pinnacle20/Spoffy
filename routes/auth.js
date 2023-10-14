@@ -21,4 +21,26 @@ router.post("/register", async (req, res) => {
     return res.status(200).json(userToReturn);
 })
 
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+        return res
+            .status(403)
+            .json({ err: "Invalid credentials" });
+    }
+    const isPasswordValid = await bcyrpt.compare(password, user.password, function (err, result) {
+    });
+    console.log('Password stored is -', user.password);
+    if (!isPasswordValid) {
+        return res
+            .status(403)
+            .json({ err: "Invalid password" });
+    }
+    const token = await getToken(email, user);
+    const userToReturn = { ...newUser.toJSON(), token };
+    delete userToReturn.password;
+    return res.status(200).json(userToReturn);
+})
+
 module.exports = router
